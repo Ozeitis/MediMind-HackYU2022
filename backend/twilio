@@ -1,0 +1,18 @@
+from twilio.rest import Client
+from medimind.models.py import Patient
+
+# Your Account SID from twilio.com/console
+account_sid = "AC759971794a410d5813bde4aeeb9c336d"
+# Your Auth Token from twilio.com/console
+auth_token  = "3a7713f93bf2d7446104084fb6dd90d1"
+
+client = Client(account_sid, auth_token)
+
+patient = Patient.query.filter_by(email=email).first()
+patient_phone = patient.phone
+
+message = client.messages.create(
+    to=   patient_phone, 
+    from_="+12568184031",
+    body="Asher is not cool and Jack is cool :)")
+print(message.sid)
